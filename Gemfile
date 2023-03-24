@@ -81,6 +81,7 @@ gem 'aws-sdk', '~> 3.1'
 gem 'delayed_job_active_record'
 gem 'searchkick', '~> 5.1', '>= 5.1.2'
 gem 'pg_search', '~> 2.3', '>= 2.3.6'
+gem 'opensearch-ruby', '~> 2.1'
 
 # Features
 gem 'acts_as_votable', '~> 0.14.0'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_24_193413) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_24_211241) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_193413) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.string "favoritable_type", null: false
+    t.bigint "favoritable_id", null: false
+    t.string "favoritor_type", null: false
+    t.bigint "favoritor_id", null: false
+    t.string "scope", default: "favorite", null: false
+    t.boolean "blocked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blocked"], name: "index_favorites_on_blocked"
+    t.index ["favoritable_id", "favoritable_type"], name: "fk_favoritables"
+    t.index ["favoritable_type", "favoritable_id", "favoritor_type", "favoritor_id", "scope"], name: "uniq_favorites__and_favoritables", unique: true
+    t.index ["favoritable_type", "favoritable_id"], name: "index_favorites_on_favoritable"
+    t.index ["favoritor_id", "favoritor_type"], name: "fk_favorites"
+    t.index ["favoritor_type", "favoritor_id"], name: "index_favorites_on_favoritor"
+    t.index ["scope"], name: "index_favorites_on_scope"
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -61,6 +79,92 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_193413) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "pay_charges", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.bigint "subscription_id"
+    t.string "processor_id", null: false
+    t.integer "amount", null: false
+    t.string "currency"
+    t.integer "application_fee_amount"
+    t.integer "amount_refunded"
+    t.jsonb "metadata"
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id", "processor_id"], name: "index_pay_charges_on_customer_id_and_processor_id", unique: true
+    t.index ["subscription_id"], name: "index_pay_charges_on_subscription_id"
+  end
+
+  create_table "pay_customers", force: :cascade do |t|
+    t.string "owner_type"
+    t.bigint "owner_id"
+    t.string "processor", null: false
+    t.string "processor_id"
+    t.boolean "default"
+    t.jsonb "data"
+    t.datetime "deleted_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_type", "owner_id", "deleted_at", "default"], name: "pay_customer_owner_index"
+    t.index ["processor", "processor_id"], name: "index_pay_customers_on_processor_and_processor_id", unique: true
+  end
+
+  create_table "pay_merchants", force: :cascade do |t|
+    t.string "owner_type"
+    t.bigint "owner_id"
+    t.string "processor", null: false
+    t.string "processor_id"
+    t.boolean "default"
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_type", "owner_id", "processor"], name: "index_pay_merchants_on_owner_type_and_owner_id_and_processor"
+  end
+
+  create_table "pay_payment_methods", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.string "processor_id", null: false
+    t.boolean "default"
+    t.string "type"
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id", "processor_id"], name: "index_pay_payment_methods_on_customer_id_and_processor_id", unique: true
+  end
+
+  create_table "pay_subscriptions", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.string "name", null: false
+    t.string "processor_id", null: false
+    t.string "processor_plan", null: false
+    t.integer "quantity", default: 1, null: false
+    t.string "status", null: false
+    t.datetime "current_period_start", precision: nil
+    t.datetime "current_period_end", precision: nil
+    t.datetime "trial_ends_at", precision: nil
+    t.datetime "ends_at", precision: nil
+    t.boolean "metered"
+    t.string "pause_behavior"
+    t.datetime "pause_starts_at", precision: nil
+    t.datetime "pause_resumes_at", precision: nil
+    t.decimal "application_fee_percent", precision: 8, scale: 2
+    t.jsonb "metadata"
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id", "processor_id"], name: "index_pay_subscriptions_on_customer_id_and_processor_id", unique: true
+    t.index ["metered"], name: "index_pay_subscriptions_on_metered"
+    t.index ["pause_starts_at"], name: "index_pay_subscriptions_on_pause_starts_at"
+  end
+
+  create_table "pay_webhooks", force: :cascade do |t|
+    t.string "processor"
+    t.string "event_type"
+    t.jsonb "event"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -101,6 +205,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_193413) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.string "votable_type"
+    t.bigint "votable_id"
+    t.string "voter_type"
+    t.bigint "voter_id"
+    t.boolean "vote_flag"
+    t.string "vote_scope"
+    t.integer "vote_weight"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
+    t.index ["votable_type", "votable_id"], name: "index_votes_on_votable"
+    t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
+    t.index ["voter_type", "voter_id"], name: "index_votes_on_voter"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "pay_charges", "pay_customers", column: "customer_id"
+  add_foreign_key "pay_charges", "pay_subscriptions", column: "subscription_id"
+  add_foreign_key "pay_payment_methods", "pay_customers", column: "customer_id"
+  add_foreign_key "pay_subscriptions", "pay_customers", column: "customer_id"
 end
