@@ -13,3 +13,62 @@
  *= require_tree .
  *= require_self
  */
+
+.active {
+  border-color: rgb(99 102 241);
+  color: rgb(17 24 39);
+}
+
+.mobile-active {
+  border-color: rgb(99 102 241);
+  background-color: rgb(238 242 255);
+  color: rgb(67 56 202);
+}
+
+.navbar-logo {
+  font-family: 'Carter One', cursive;
+  font-weight: bold;
+  font-size: 1.50rem;
+  letter-spacing: 0.06rem;
+  color: rgb(30 41 59);
+}
+
+.navbar-logo:hover {
+  color: rgb(71 85 105);
+}
+
+.notice {
+  @apply flex items-center text-sm justify-center font-medium p-4;
+
+  &.notice-info {
+    @apply bg-blue-50 text-blue-700;
+
+    svg {
+      @apply text-blue-400;
+    }
+  }
+
+  &.notice-success {
+    @apply bg-green-50 text-green-700;
+
+    svg {
+      @apply text-green-400;
+    }
+  }
+
+  &.notice-error {
+    @apply bg-red-50 text-red-700;
+
+    svg {
+      @apply text-red-400;
+    }
+  }
+
+  &.notice-warning {
+    @apply bg-yellow-50 text-yellow-700;
+
+    svg {
+      @apply text-yellow-400;
+    }
+  }
+}

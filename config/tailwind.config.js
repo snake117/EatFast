@@ -15,7 +15,8 @@ module.exports = {
     './app/views/**/*.slim',
     './app/helpers/**/*.rb',
     './app/assets/stylesheets/**/*.css',
-    './app/javascript/**/*.js'
+    './app/javascript/**/*.js',
+    './vendor/javascript/tailwindcss-stimulus-components.js'
   ],
   // All the default values will be compiled unless they are overridden below
   theme: {
