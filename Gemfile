@@ -78,7 +78,8 @@ end
 
 ## ADDED GEMS
 # Infrastructure and Services
-gem 'aws-sdk', '~> 3.1'
+# gem 'aws-sdk', '~> 3.1'
+gem 'aws-sdk-s3', '~> 1.119', '>= 1.119.2'
 gem 'delayed_job_active_record'
 gem 'searchkick', '~> 5.1', '>= 5.1.2'
 gem 'pg_search', '~> 2.3', '>= 2.3.6'
