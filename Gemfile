@@ -120,4 +120,4 @@ gem 'invisible_captcha', '~> 2.0'
 # Payments processing and transactions
 gem 'pay', '~> 6.3', '>= 6.3.1'
 gem "stripe", "~> 8.0"
-gem 'receipts', '~> 2.2'
+# gem 'receipts', '~> 2.2'
