@@ -103,6 +103,7 @@ gem 'measured-rails', '~> 2.8', '>= 2.8.2'
 gem 'money-rails', '~> 1.15'
 gem 'administrate', '~> 0.18.0'
 gem 'administrate-field-active_storage', '~> 0.4.2'
+gem 'jsonb_accessor', '~> 1.3', '>= 1.3.7'
 
 # Data generation and processing
 gem 'faker', '~> 3.1'
