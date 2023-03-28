@@ -6,8 +6,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-# Create admin users
-
+puts "------BEGIN: Users------"
 # Admins
 admin_names = {
 	neema: {
@@ -50,45 +49,44 @@ admin_names.each do |key, values|
 		content_type: "image/jpg"
 	}
 
-	User.create!(
+	create_user = User.create!(
 		email: values[:email],
 		password: "#{values[:first_name].downcase}admin",
 		username: values[:full_name].gsub(/\s+/, "").downcase,
-		first_name: values[:first_name],
-		last_name: values[:last_name],
+		first_name: values[:first_name].downcase,
+		last_name: values[:last_name].downcase,
 		country_code: "US",
 		time_zone: "Eastern Time (US & Canada)",
 		gender: values[:gender],
 		birthday: Faker::Date.birthday(min_age: 22, max_age: 32),
 		admin: true
 	).avatar.attach(admin_avatar)
+
+	# puts "\tCreated user: #{create_user[:first_name]} #{create_user[:last_name]} [#{create_user[:username]}]!"
+	puts "\tCreated user: #{create_user}"
 end
+puts "------END: Users------"
 
-# Create regular users with male gender
-# 15.times do
-# 	user_first_name = Faker::Name.male_first_name
+require 'active_support/core_ext/string/inflections.rb'
 
-# 	user_avatar_filename = "admin-#{user_first_name.downcase}-avatar"
-# 	admin_neema_avatar_url = Faker::Avatar.image(slug: user_avatar_filename, size: "300x300", format: "jpg")
+puts "------BEGIN: Categories------"
+categories = [
+	"Restaurants", "Nightlife", "Bars", "American", "Burgers", "Food", "American",
+	"Breakfast & Brunch", "Pizza", "Cocktail Bars", "Sports Bars", "Fast Food", "Coffee & Tea",
+	"Seafood", "Diners", "Pubs", "Sandwiches", "Mediterranean", "Arts & Entertainment",
+	"Steakhouses", "Chicken Wings", "Delis", "Event Planning & Services", "Italian", "Salad",
+	"Greek", "Barbeque", "Beer Bar", "Breweries", "Food Trucks", "Hot Dogs",
+	"Middle Eastern", "Cafes", "Lounges", "Mexican", "Specialty Food",
+	"Vegan", "Venues & Event Spaces", "Desserts", "Food Delivery Services", "Gastropubs",
+	"Juice Bars & Smoothies", "Music Venues", "Tapas/Small Plates", "Wine Bars", "Canadian (New)",
+	"Chinese", "Convenience Stores", "Meat Shops", "Soul Food", "Sushi Bars",
+	"Vegetarian", "Asian Fusion", "Brewpubs", "Caterers", "Chicken Shop", "Comfort Food",
+	"Dance Clubs", "Food Court", "French", "Halal", "Hotels", "Hotels & Travel",
+	"Irish Pub", "Lebanese", "Social Clubs", "Soup", "Southern"
+]
 
-# 	admin_neema_avatar_hash = {
-# 		io: URI.parse(admin_neema_avatar_url).open,
-# 		filename: "#{user_avatar_filename}.jpg",
-# 		content_type: "image/jpg"
-# 	}
-
-# 	create_admin_neema = User.create!(
-# 		email: Faker::Internet.email,
-# 		password: "password",
-# 		username: Faker::Internet.username(name: user_first_name),
-# 		first_name: user_first_name,
-# 		last_name: Faker::Name.last_name,
-# 		country_code: Faker.Address.country_code,
-# 		time_zone: Faker::Address.time_zone,
-# 		gender: 1,
-# 		birthday: Faker::Date.birthday(min_age: 25, max_age: 35),
-# 		admin: true
-# 	)
-
-# 	create_admin_neema.avatar.attach(admin_neema_avatar_hash)
-# end
+categories.each do |category|
+	create_category = Category.create!(name: category.parameterize, display_name: category)
+	puts "Category created: #{create_category.display_name} [#{create_category.name}]!"
+end
+puts "------END: Categories------"

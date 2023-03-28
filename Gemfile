@@ -60,6 +60,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem 'annotate', '~> 3.2'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -105,7 +106,7 @@ gem 'administrate-field-active_storage', '~> 0.4.2'
 
 # Data generation and processing
 gem 'faker', '~> 3.1'
-gem 'ancestry', '~> 4.2'
+gem 'ancestry', '~> 4.3', '>= 4.3.2'
 gem 'countries', '~> 5.3', '>= 5.3.1'
 gem 'country_select', '~> 8.0', '>= 8.0.1'
 gem 'oj', '~> 3.14', '>= 3.14.1'

@@ -86,8 +86,11 @@ GEM
       rails (>= 7.0)
     ancestry (4.3.2)
       activerecord (>= 5.2.6)
+    annotate (3.2.0)
+      activerecord (>= 3.2, < 8.0)
+      rake (>= 10.4, < 14.0)
     aws-eventstream (1.2.0)
-    aws-partitions (1.735.0)
+    aws-partitions (1.736.0)
     aws-sdk-core (3.171.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -394,7 +397,8 @@ DEPENDENCIES
   acts_as_votable (~> 0.14.0)
   administrate (~> 0.18.0)
   administrate-field-active_storage (~> 0.4.2)
-  ancestry (~> 4.2)
+  ancestry (~> 4.3, >= 4.3.2)
+  annotate (~> 3.2)
   aws-sdk-s3 (~> 1.119, >= 1.119.2)
   bootsnap
   capybara

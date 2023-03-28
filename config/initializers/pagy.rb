@@ -118,7 +118,7 @@
 # DEFAULT[:searchkick_pagy_search] = :pagy_search
 # Default original :search method called internally to do the actual search
 # Pagy::DEFAULT[:searchkick_search] = :search
-# require 'pagy/extras/searchkick'
+require 'pagy/extras/searchkick'
 # uncomment if you are going to use Searchkick.pagy_search
 # Searchkick.extend Pagy::Searchkick
 
@@ -179,8 +179,9 @@
 
 # Overflow extra: Allow for easy handling of overflowing pages
 # See https://ddnexus.github.io/pagy/docs/extras/overflow
-# require 'pagy/extras/overflow'
+require 'pagy/extras/overflow'
 # Pagy::DEFAULT[:overflow] = :empty_page    # default  (other options: :last_page and :exception)
+Pagy::DEFAULT[:overflow] = :last_page
 
 # Support extra: Extra support for features like: incremental, infinite, auto-scroll pagination
 # See https://ddnexus.github.io/pagy/docs/extras/support

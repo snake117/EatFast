@@ -1,5 +1,19 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: favorites
+#
+#  id               :bigint           not null, primary key
+#  favoritable_type :string           not null
+#  favoritable_id   :bigint           not null
+#  favoritor_type   :string           not null
+#  favoritor_id     :bigint           not null
+#  scope            :string           default("favorite"), not null
+#  blocked          :boolean          default(FALSE), not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
 class Favorite < ApplicationRecord
   extend ActsAsFavoritor::FavoriteScopes
 
