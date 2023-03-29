@@ -25,11 +25,12 @@ class Restaurant < ApplicationRecord
 
   has_one_attached :logo
   has_one_attached :banner
+  has_many_attached :images
 
   # Broadcast changes in realtime with Hotwire
-  # after_create_commit  -> { broadcast_prepend_later_to :brands, partial: "restaurants/index", locals: { brand: self } }
-  # after_update_commit  -> { broadcast_replace_later_to self }
-  # after_destroy_commit -> { broadcast_remove_to :brands, target: dom_id(self, :index) }
+  after_create_commit  -> { broadcast_prepend_later_to :restaurants, partial: "restaurants/index", locals: { brand: self } }
+  after_update_commit  -> { broadcast_replace_later_to self }
+  after_destroy_commit -> { broadcast_remove_to :restaurants, target: dom_id(self, :index) }
 
   friendly_id :name, use: :slugged
 

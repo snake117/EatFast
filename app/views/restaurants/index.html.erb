@@ -10,8 +10,8 @@
   <!-- </div> -->
 
       <!-- <div id="restaurants" class="min-w-full"> -->
-      <% @records.in_groups_of(3, false).each do |restaurants| %>
-        <%= render partial: "restaurants/restaurant", locals: { restaurants: restaurants } %>
+      <% @records.in_groups_of(3, false) do |restaurants| %>
+        <%= render partial: "restaurants/restaurant", collection: restaurants %>
       <% end %>
       <!-- </div> -->
 

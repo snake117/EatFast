@@ -15,19 +15,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
   </head>
 
-  <body>
-    <div class="min-h-full">
+  <body class="h-full font-sans antialiased font-normal leading-normal bg-gray-50">
+    <!-- <div class="min-h-full"> -->
       <%= render partial: "shared/flash" %>
       
       <%= render partial: "shared/navbar" %>
 
-      <main>
-        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div class="main mx-auto max-w-full sm:px-6 lg:px-8">
+        <!-- <div class="mx-auto max-w-full sm:px-6 lg:px-8"> -->
           <%= yield %>
-        </div>
-      </main>
+        <!-- </div> -->
+      </div>
 
-    </div>
+    <!-- </div> -->
 
     <%= render partial: "shared/footer" %>
 
