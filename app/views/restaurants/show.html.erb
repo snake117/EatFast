@@ -23,6 +23,6 @@
   <%= turbo_stream_from @restaurant, :comments %>
 
   <%= tag.div id: "#{dom_id(@restaurant)}_comments" do %>
-    <%= render @restaurant.comments %>
+    <%= render partial: "comments/comment_with_replies", collection: @restaurant.comments, as: :comment %>
   <% end %>
 </div>
