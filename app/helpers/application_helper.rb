@@ -1,4 +1,6 @@
 module ApplicationHelper
+	include Pagy::Frontend
+	
 	def nav_link_to(name = nil, options = {}, html_options = {}, &block)
 	  if block
 	    html_options = options
@@ -56,5 +58,9 @@ module ApplicationHelper
 	  return link_to url, html_options, &block if block
 
 	  link_to name, url, html_options
+	end
+
+	def price_range_output(num = 2)
+		return "$" * num
 	end
 end

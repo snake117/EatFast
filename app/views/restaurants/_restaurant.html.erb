@@ -1,57 +1,25 @@
-<div id="<%= dom_id restaurant %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">User:</strong>
-    <%= restaurant.user_id %>
-  </p>
+<% restaurants.each do |restaurant| %>
+  <div id="<%= dom_id restaurant %>">
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Category:</strong>
-    <%= restaurant.category_id %>
-  </p>
+    <div class="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
+      <div class="aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
+        <%= image_tag(url_for(restaurant.logo.variant(resize_to_limit: [100, 100])), class: "h-full w-full object-cover object-center sm:h-full sm:w-full") %>
+        <!-- <img src="https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-01.jpg" alt="Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green." class="h-full w-full object-cover object-center sm:h-full sm:w-full"> -->
+      </div>
+      <div class="flex flex-1 flex-col space-y-2 p-4">
+        <h3 class="text-sm font-medium text-gray-900">
+          <%= link_to restaurant_path(restaurant) do %>
+            <span aria-hidden="true" class="absolute inset-0"></span>
+            <%= restaurant.name %>
+          <% end %>
+        </h3>
+        <p class="text-sm text-gray-500"><%= truncate(restaurant.description, length: 20) %></p>
+        <div class="flex flex-1 flex-col justify-end">
+          <p class="text-sm italic text-gray-500"><%= price_range_output(restaurant.price_range) %></p>
+          <p class="text-base font-medium text-gray-900"><%= restaurant.category.display_name %></p>
+        </div>
+      </div>
+    </div>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
-    <%= restaurant.name %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Description:</strong>
-    <%= restaurant.description %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Price range:</strong>
-    <%= restaurant.price_range %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Claimed:</strong>
-    <%= restaurant.claimed %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Email:</strong>
-    <%= restaurant.email %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Phone:</strong>
-    <%= restaurant.phone %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Website:</strong>
-    <%= restaurant.website %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Hours:</strong>
-    <%= restaurant.hours %>
-  </p>
-
-  <% if action_name != "show" %>
-    <%= link_to "Show this restaurant", restaurant, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this restaurant', edit_restaurant_path(restaurant), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
-</div>
+  </div>
+<% end %>

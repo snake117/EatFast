@@ -39,7 +39,7 @@ restaurant_owners.each do |restaurant_owner|
 
 		logo = restaurant_logos.sample
 		restaurant_logo_data = {
-			io: File.open(logo),
+			io: File.open(Rails.root.join('db', 'seeds', 'logos', File.basename(logo))),
 			filename: File.basename(logo),
 			content_type: "image/png"
 		}
@@ -52,7 +52,7 @@ restaurant_owners.each do |restaurant_owner|
 
 		banner = restaurant_banners.sample
 		restaurant_banner_data = {
-			io: File.open(banner),
+			io: File.open(Rails.root.join('db', 'seeds', 'banners', File.basename(banner))),
 			filename: File.basename(banner),
 			content_type: "image/jpg"
 		}
