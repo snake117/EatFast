@@ -1,0 +1,10 @@
+<%= form_with model: [commentable, comment], id: dom_id_for_records(commentable, comment) do |form| %>
+	<% if form.object.errors.any? %>
+		<% form.object.errors.full_messages.each do |message| %>
+			<div class="alert alert-danger"><%= message %></div>
+		<% end %>
+	<% end %>
+
+	<%= form.rich_text_area :body %>
+	<%= form.submit class: "btn btn-primary" %>
+<% end %>

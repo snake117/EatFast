@@ -23,6 +23,8 @@ class Restaurant < ApplicationRecord
   belongs_to :user
   belongs_to :category
 
+  has_many :comments, as: :commentable
+
   has_one_attached :logo
   has_one_attached :banner
   has_many_attached :images
