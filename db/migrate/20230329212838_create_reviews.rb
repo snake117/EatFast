@@ -1,17 +1,19 @@
-class CreateRestaurants < ActiveRecord::Migration[7.0]
+class CreateReviews < ActiveRecord::Migration[7.0]
   def change
-    create_table :restaurants do |t|
+    create_table :reviews do |t|
       t.references :user, null: false, foreign_key: true
-      t.references :category, null: false, foreign_key: true, index: true
+      t.references :restaurant, null: false, foreign_key: true
 
-      t.string :name, null: false, limit: 200, index: true
-      t.text :description, null: false, limit: 5000
-      t.integer :price_range, null: false, numericality: true, index: true
-      t.boolean :claimed, null: false, default: false
-      t.string :email, null: false, limit: 100
-      t.string :phone, null: false, limit: 20
-      t.string :website, null: false, limit: 200
-      t.jsonb :hours, null: true
+      t.string :title, null: false, limit: 125
+      
+      # Ratings
+      t.decimal :food, precision: 2, scale: 2, null: false, default: 0.0
+      t.decimal :atmosphere, precision: 2, scale: 2, null: false, default: 0.0
+      t.decimal :price, precision: 2, scale: 2, null: false, default: 0.0
+      t.decimal :speed, precision: 2, scale: 2, null: false, default: 0.0
+      t.decimal :overall, precision: 2, scale: 2, null: false, default: 0.0
+
+      t.boolean :recommend, null: false, default: true
 
       # Slug for FriendlyID
       t.string :slug, null: false, index: { unique: true }

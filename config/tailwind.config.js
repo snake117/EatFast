@@ -31,6 +31,10 @@ module.exports = {
         "code-400": "#fefcf9",
         "code-600": "#3c455b",
       },
+      maxWidth: {
+        '8xl': '84rem',
+        '9xl': '88rem'
+      },
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },

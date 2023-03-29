@@ -1,0 +1,18 @@
+<% model = [local_assigns[:reviewable], review].compact %>
+
+<%= form_with model: model, id: dom_id_for_records(*model), data: local_assigns[:data], class: ["my-4"] + Array.wrap(local_assigns[:class]) do |form| %>
+	<% if form.object.errors.any? %>
+		<% form.object.errors.full_messages.each do |message| %>
+			<div class="alert alert-danger"><%= message %></div>
+		<% end %>
+	<% end %>
+
+	<%= form.label :title %>
+    <%= form.text_field :title, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+
+  <%= form.label :body %>
+	<%= form.rich_text_area :body, id: "#{dom_id_for_records(*model)}_body" %>
+
+	<%= form.submit class: "btn btn-primary" %>
+	<%= link_to "Cancel", review, class: "btn btn-link" if form.object.persisted? %>
+<% end %>

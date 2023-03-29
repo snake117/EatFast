@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_29_164423) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_29_212838) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -202,13 +202,50 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_164423) do
     t.string "phone", limit: 20, null: false
     t.string "website", limit: 200, null: false
     t.jsonb "hours"
-    t.string "slug", default: "", null: false
+    t.string "slug", null: false
+    t.integer "cached_votes_total", default: 0
+    t.integer "cached_votes_score", default: 0
+    t.integer "cached_votes_up", default: 0
+    t.integer "cached_votes_down", default: 0
+    t.integer "cached_weighted_score", default: 0
+    t.integer "cached_weighted_total", default: 0
+    t.float "cached_weighted_average", default: 0.0
+    t.text "favoritable_score"
+    t.text "favoritable_total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_restaurants_on_category_id"
     t.index ["name"], name: "index_restaurants_on_name"
     t.index ["price_range"], name: "index_restaurants_on_price_range"
+    t.index ["slug"], name: "index_restaurants_on_slug", unique: true
     t.index ["user_id"], name: "index_restaurants_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "restaurant_id", null: false
+    t.string "title", limit: 125, null: false
+    t.decimal "food", precision: 2, scale: 2, default: "0.0", null: false
+    t.decimal "atmosphere", precision: 2, scale: 2, default: "0.0", null: false
+    t.decimal "price", precision: 2, scale: 2, default: "0.0", null: false
+    t.decimal "speed", precision: 2, scale: 2, default: "0.0", null: false
+    t.decimal "overall", precision: 2, scale: 2, default: "0.0", null: false
+    t.boolean "recommend", default: true, null: false
+    t.string "slug", null: false
+    t.integer "cached_votes_total", default: 0
+    t.integer "cached_votes_score", default: 0
+    t.integer "cached_votes_up", default: 0
+    t.integer "cached_votes_down", default: 0
+    t.integer "cached_weighted_score", default: 0
+    t.integer "cached_weighted_total", default: 0
+    t.float "cached_weighted_average", default: 0.0
+    t.text "favoritable_score"
+    t.text "favoritable_total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["restaurant_id"], name: "index_reviews_on_restaurant_id"
+    t.index ["slug"], name: "index_reviews_on_slug", unique: true
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -275,4 +312,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_164423) do
   add_foreign_key "pay_subscriptions", "pay_customers", column: "customer_id"
   add_foreign_key "restaurants", "categories"
   add_foreign_key "restaurants", "users"
+  add_foreign_key "reviews", "restaurants"
+  add_foreign_key "reviews", "users"
 end

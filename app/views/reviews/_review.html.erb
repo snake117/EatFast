@@ -1,0 +1,12 @@
+<%= turbo_stream_from review %>
+<%= turbo_frame_tag review do %>
+  <div class="d-flex justify-content-between">
+    <div><%= review.user.name %></div>
+    <div class="d-flex">
+      <%= link_to "Edit", edit_review_path(review), class: "mr-2" %>
+      <%= button_to "Delete", review_path(review), method: :delete, data: { confirm: "Are you sure?" } %>
+    </div>
+  </div>
+
+  <%= review.body %>
+<% end %>
