@@ -1,5 +1,6 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: %i[ show edit update destroy ]
+  before_action :set_header, only: %i[ index ]
 
   # GET /restaurants or /restaurants.json
   def index
@@ -61,6 +62,10 @@ class RestaurantsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_restaurant
       @restaurant = Restaurant.friendly.find(params[:id])
+    end
+
+    def set_header
+      @header = "Restaurants"
     end
 
     # Only allow a list of trusted parameters through.

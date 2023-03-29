@@ -12,42 +12,39 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
   </head>
 
-  <body class="h-full font-sans antialiased font-normal leading-normal bg-gray-50">
-    <!-- <div class="min-h-full"> -->
-      <%= render partial: "shared/flash" %>
-      
-      <%= render partial: "shared/navbar" %>
 
-      <div class="main mx-auto max-w-full sm:px-6 lg:px-8">
-        <!-- <div class="mx-auto max-w-full sm:px-6 lg:px-8"> -->
-          <%= yield %>
+
+  <body>
+    <%= render partial: "shared/flash" %>
+          
+    <%= render partial: "shared/navbar" %>
+
+      <!-- <header> -->
+        <!-- <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"> -->
+          <%# if @header.present? %>
+            <!-- <h1 class="text-3xl font-bold leading-tight tracking-tight text-gray-900"><%= @header %></h1> -->
+          <%# end %>
         <!-- </div> -->
+      <!-- </header> -->
+      <div class="mx-auto max-w-full sm:px-6 lg:px-8">
+        <!-- <div class="min-h-full"> -->
+        
+
+        <!-- <div class="main mx-auto max-w-full sm:px-6 lg:px-8"> -->
+          <!-- <div class="mx-auto max-w-full sm:px-6 lg:px-8"> -->
+            <%= yield %>
+          <!-- </div> -->
+        <!-- </div> -->
+
+      <!-- </div> -->
+
+      <%= render partial: "shared/footer" %>
       </div>
-
-    <!-- </div> -->
-
-    <%= render partial: "shared/footer" %>
 
   </body>
 </html>
 
-
-
-
-
-
-<!--
-  This example requires updating your template:
-
-  ```
-  <html class="h-full">
-  <body class="h-full">
-  ```
--->
-<div class="min-h-full">
-
-  
-</div>
