@@ -21,7 +21,7 @@ class Category < ApplicationRecord
   # after_update_commit  -> { broadcast_replace_later_to self }
   # after_destroy_commit -> { broadcast_remove_to :categories, target: dom_id(self, :index) }
 
-  # has_many :products
+  has_many :restaurants
 
   friendly_id :display_name, use: :slugged
 

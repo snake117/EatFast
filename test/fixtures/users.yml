@@ -12,6 +12,7 @@
 #  time_zone              :string
 #  gender                 :integer          not null
 #  birthday               :date             not null
+#  business_owner         :boolean          default(FALSE), not null
 #  admin                  :boolean          default(FALSE), not null
 #  slug                   :string           default(""), not null
 #  reset_password_token   :string

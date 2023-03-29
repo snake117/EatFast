@@ -35,13 +35,26 @@ namespace :db do
       Rake::Task["db:migrate"].invoke
 
       foundation_partials_path_array = [
-        # Rails.root.join('db', 'seeds', 'categories.rb'),
-        Rails.root.join('db', 'seeds', 'users.rb'),
-        # Rails.root.join('db', 'seeds', 'profiles.rb'),
+        Rails.root.join('db', 'seeds', 'categories.rb'),
+        # Rails.root.join('db', 'seeds', 'users.rb'),
+        # Rails.root.join('db', 'seeds', 'restaurants.rb'),
       ]
 
       foundation_partials_path_array.each do |foundation_partial_path|
         load(foundation_partial_path) if File.exist?(foundation_partial_path)
+      end
+
+      # Rake::Task["db:seed:users"].invoke
+      # Rake::Task["db:seed:restaurants"].invoke
+    end
+
+    # Load individual seed_partials located under seed_partials directory
+    Dir[Rails.root.join('db', 'seeds', '*.rb')].each do |filename|
+      task_name = File.basename(filename, '.rb')
+      desc "Seed " + task_name + ", based on the file with the same name in `db/seeds/*.rb`"
+
+      task task_name.to_sym => :environment do
+        load(filename) if File.exist?(filename)
       end
     end
 

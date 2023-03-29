@@ -16,6 +16,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
 
       t.date :birthday, null: false
 
+      t.boolean :business_owner, null: false, default: false
+
       t.boolean :admin, null: false, default: false
 
       t.string :slug, null: false, default: ""

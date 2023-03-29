@@ -12,6 +12,7 @@
 #  time_zone              :string
 #  gender                 :integer          not null
 #  birthday               :date             not null
+#  business_owner         :boolean          default(FALSE), not null
 #  admin                  :boolean          default(FALSE), not null
 #  slug                   :string           default(""), not null
 #  reset_password_token   :string
@@ -59,4 +60,14 @@ class User < ApplicationRecord
   validates :birthday, presence: true
   validates :country_code, presence: true
   validates :time_zone, presence: true
+  # validates :admin, presence: true
+  # validates :business_owner, presence: true
+
+  def search_data
+    {
+      username: username,
+      first_name: first_name,
+      last_name: last_name
+    }
+  end
 end

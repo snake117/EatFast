@@ -1,0 +1,57 @@
+<div id="<%= dom_id restaurant %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">User:</strong>
+    <%= restaurant.user_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Category:</strong>
+    <%= restaurant.category_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= restaurant.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Description:</strong>
+    <%= restaurant.description %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Price range:</strong>
+    <%= restaurant.price_range %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Claimed:</strong>
+    <%= restaurant.claimed %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Email:</strong>
+    <%= restaurant.email %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Phone:</strong>
+    <%= restaurant.phone %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Website:</strong>
+    <%= restaurant.website %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Hours:</strong>
+    <%= restaurant.hours %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this restaurant", restaurant, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this restaurant', edit_restaurant_path(restaurant), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

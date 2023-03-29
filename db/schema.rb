@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_28_200003) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_28_215437) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -180,6 +180,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_200003) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "restaurants", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "category_id", null: false
+    t.string "name", limit: 200, null: false
+    t.text "description", null: false
+    t.integer "price_range", null: false
+    t.boolean "claimed", default: false, null: false
+    t.string "email", limit: 100, null: false
+    t.string "phone", limit: 20, null: false
+    t.string "website", limit: 200, null: false
+    t.jsonb "hours"
+    t.string "slug", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_restaurants_on_category_id"
+    t.index ["name"], name: "index_restaurants_on_name"
+    t.index ["price_range"], name: "index_restaurants_on_price_range"
+    t.index ["user_id"], name: "index_restaurants_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -190,6 +210,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_200003) do
     t.string "time_zone"
     t.integer "gender", null: false
     t.date "birthday", null: false
+    t.boolean "business_owner", default: false, null: false
     t.boolean "admin", default: false, null: false
     t.string "slug", default: "", null: false
     t.string "reset_password_token"
@@ -240,4 +261,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_200003) do
   add_foreign_key "pay_charges", "pay_subscriptions", column: "subscription_id"
   add_foreign_key "pay_payment_methods", "pay_customers", column: "customer_id"
   add_foreign_key "pay_subscriptions", "pay_customers", column: "customer_id"
+  add_foreign_key "restaurants", "categories"
+  add_foreign_key "restaurants", "users"
 end
