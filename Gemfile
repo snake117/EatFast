@@ -55,12 +55,15 @@ gem "image_processing", "~> 1.2"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'annotate', '~> 3.2'
+  # gem 'letter_opener', '~> 1.8', '>= 1.8.1'
+  gem 'letter_opener_web', '~> 2.0'
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-  gem 'annotate', '~> 3.2'
+  
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -85,14 +88,14 @@ gem 'delayed_job_active_record'
 gem 'searchkick', '~> 5.1', '>= 5.1.2'
 gem 'pg_search', '~> 2.3', '>= 2.3.6'
 gem 'opensearch-ruby', '~> 2.1'
+gem 'sidekiq', '~> 7.0', '>= 7.0.7'
+gem 'sidekiq-cron', '~> 1.10'
+gem 'meta-tags', '~> 2.18'
 
 # Features
 gem 'acts_as_votable', '~> 0.14.0'
 gem 'acts_as_favoritor', '~> 6.0'
 gem 'acts-as-taggable-on', '~> 9.0', '>= 9.0.1'
-# gem 'flipper', '~> 0.26.0'
-# gem 'flipper-active_record', '~> 0.26.0'
-# gem 'flipper-ui', '~> 0.26.0'
 gem 'friendly_id', '~> 5.4', '>= 5.4.2'
 gem 'noticed', '~> 1.6'
 gem 'pagy', '~> 6.0', '>= 6.0.1'
@@ -104,6 +107,9 @@ gem 'money-rails', '~> 1.15'
 gem 'administrate', '~> 0.18.0'
 gem 'administrate-field-active_storage', '~> 0.4.2'
 gem 'jsonb_accessor', '~> 1.3', '>= 1.3.7'
+# gem 'flipper', '~> 0.26.0'
+# gem 'flipper-active_record', '~> 0.26.0'
+# gem 'flipper-ui', '~> 0.26.0'
 
 # Data generation and processing
 gem 'faker', '~> 3.1'
@@ -113,6 +119,7 @@ gem 'countries', '~> 5.3', '>= 5.3.1'
 gem 'country_select', '~> 8.0', '>= 8.0.1'
 gem 'oj', '~> 3.14', '>= 3.14.1'
 gem 'csv', '~> 3.2', '>= 3.2.6'
+gem 'factory_bot_rails', '~> 6.2'
 
 # Auth, Security and Integrity
 gem 'devise', '~> 4.8', '>= 4.8.1'

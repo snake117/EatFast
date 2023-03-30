@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: restaurants
+# Table name: menu_items
 #
 #  id                      :bigint           not null, primary key
 #  cached_votes_down       :integer          default(0)
@@ -10,39 +10,36 @@
 #  cached_weighted_average :float            default(0.0)
 #  cached_weighted_score   :integer          default(0)
 #  cached_weighted_total   :integer          default(0)
-#  claimed                 :boolean          default(FALSE), not null
 #  description             :text             not null
-#  email                   :string(100)      not null
 #  favoritable_score       :text
 #  favoritable_total       :text
-#  hours                   :jsonb
-#  name                    :string(200)      not null
-#  phone                   :string(20)       not null
-#  price_range             :integer          not null
+#  name                    :string(150)      not null
+#  price_cents_cents       :integer          default(0), not null
+#  price_cents_currency    :string           default("USD"), not null
 #  slug                    :string           not null
-#  website                 :string(200)      not null
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  category_id             :bigint           not null
-#  user_id                 :bigint           not null
+#  restaurant_id           :bigint           not null
 #
 # Indexes
 #
-#  index_restaurants_on_category_id  (category_id)
-#  index_restaurants_on_name         (name)
-#  index_restaurants_on_price_range  (price_range)
-#  index_restaurants_on_slug         (slug) UNIQUE
-#  index_restaurants_on_user_id      (user_id)
+#  index_menu_items_on_category_id    (category_id)
+#  index_menu_items_on_restaurant_id  (restaurant_id)
+#  index_menu_items_on_slug           (slug)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (category_id => categories.id)
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_...  (restaurant_id => restaurants.id)
 #
-require "test_helper"
-
-class RestaurantTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+FactoryBot.define do
+  factory :menu_item do
+    restaurant { nil }
+    category { nil }
+    name { "MyString" }
+    description { "MyText" }
+    price { 1 }
+    image { nil }
+  end
 end

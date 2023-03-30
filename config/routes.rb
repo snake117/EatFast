@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :menu_items
   root to: 'pages#index'
 
   get 'pages/about'

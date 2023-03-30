@@ -1,0 +1,37 @@
+<div id="<%= dom_id menu_item %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Restaurant:</strong>
+    <%= menu_item.restaurant_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Category:</strong>
+    <%= menu_item.category_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= menu_item.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Description:</strong>
+    <%= menu_item.description %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Price:</strong>
+    <%= menu_item.price %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Image:</strong>
+    <%= link_to menu_item.image.filename, menu_item.image if menu_item.image.attached? %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this menu item", menu_item, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this menu item', edit_menu_item_path(menu_item), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

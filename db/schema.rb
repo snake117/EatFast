@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_29_212838) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_30_153557) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -103,6 +103,30 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_212838) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "menu_items", force: :cascade do |t|
+    t.bigint "restaurant_id", null: false
+    t.bigint "category_id", null: false
+    t.string "name", limit: 150, null: false
+    t.text "description", null: false
+    t.integer "price_cents_cents", default: 0, null: false
+    t.string "price_cents_currency", default: "USD", null: false
+    t.string "slug", null: false
+    t.integer "cached_votes_total", default: 0
+    t.integer "cached_votes_score", default: 0
+    t.integer "cached_votes_up", default: 0
+    t.integer "cached_votes_down", default: 0
+    t.integer "cached_weighted_score", default: 0
+    t.integer "cached_weighted_total", default: 0
+    t.float "cached_weighted_average", default: 0.0
+    t.text "favoritable_score"
+    t.text "favoritable_total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_menu_items_on_category_id"
+    t.index ["restaurant_id"], name: "index_menu_items_on_restaurant_id"
+    t.index ["slug"], name: "index_menu_items_on_slug"
   end
 
   create_table "pay_charges", force: :cascade do |t|
@@ -306,6 +330,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_212838) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "users"
+  add_foreign_key "menu_items", "categories"
+  add_foreign_key "menu_items", "restaurants"
   add_foreign_key "pay_charges", "pay_customers", column: "customer_id"
   add_foreign_key "pay_charges", "pay_subscriptions", column: "subscription_id"
   add_foreign_key "pay_payment_methods", "pay_customers", column: "customer_id"

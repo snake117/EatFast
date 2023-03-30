@@ -21,5 +21,11 @@ module Eatfast
 
     # Default Rails setup does NOT allow subdirectories in assets/images
     # config.assets.paths << Rails.root.join('app', 'assets', 'images', 'devise', '**')
+
+    # Rails 7 defaults to libvips as the variant processor
+    # libvips is up to 10x faster and consumes 1/10th the memory of imagemagick
+    # If you need to use imagemagick, uncomment this to switch
+    # config.active_storage.variant_processor = :mini_magick
+    config.active_storage.variant_processor = :vips
   end
 end
