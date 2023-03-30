@@ -63,4 +63,9 @@ module ApplicationHelper
 	def price_range_output(num = 2)
 		return "$" * num
 	end
+
+	def random_asset_image
+		full_image_path = Dir[Rails.root.join('app', 'assets', 'images', '*')].sample
+		return File.basename(full_image_path)
+	end
 end

@@ -5,7 +5,12 @@ Rails.application.routes.draw do
   get 'pages/privacy'
   get 'pages/terms'
   
-  devise_for :users
+  devise_for :users,
+    controllers: {
+      # omniauth_callbacks: "users/omniauth_callbacks",
+      registrations: "users/registrations",
+      sessions: "users/sessions"
+    }
 
   resources :restaurants do
     resources :comments, module: :restaurants

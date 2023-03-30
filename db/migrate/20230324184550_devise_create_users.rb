@@ -7,8 +7,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.string :email,              null: false, default: "", index: { unique: true }
       t.string :encrypted_password, null: false, default: "", index: { unique: true }
       t.string :username, null: false, default: "", index: { unique: true }
-      t.string :first_name, null: false, default: ""
-      t.string :last_name, null: false, default: ""
+      t.string :first_name #, null: false, default: ""
+      t.string :last_name #, null: false, default: ""
       t.string :country_code, null: false, default: "", index: true
       t.string :time_zone, null: true
 

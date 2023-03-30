@@ -107,7 +107,7 @@ gem 'jsonb_accessor', '~> 1.3', '>= 1.3.7'
 
 # Data generation and processing
 gem 'faker', '~> 3.1'
-# gem 'unsplash', '~> 3.0'
+gem 'unsplash', '~> 3.0'
 gem 'ancestry', '~> 4.3', '>= 4.3.2'
 gem 'countries', '~> 5.3', '>= 5.3.1'
 gem 'country_select', '~> 8.0', '>= 8.0.1'

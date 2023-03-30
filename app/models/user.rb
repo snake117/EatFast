@@ -60,7 +60,7 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true, length: { in: 2..50 }
   validates :last_name, presence: true, length: { in: 2..50 }
-  validates :username, presence: true, uniqueness: true, length: { in: 3..20 }
+  validates :username, presence: true, uniqueness: true, length: { in: 3..25 }
   validates :gender, presence: true, numericality: { only_integer: true } #, inclusion: { in: %w(Male Female) }
   validates :birthday, presence: true
   validates :country_code, presence: true

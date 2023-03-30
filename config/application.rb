@@ -18,5 +18,8 @@ module Eatfast
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Default Rails setup does NOT allow subdirectories in assets/images
+    # config.assets.paths << Rails.root.join('app', 'assets', 'images', 'devise', '**')
   end
 end
