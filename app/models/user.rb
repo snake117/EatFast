@@ -44,16 +44,19 @@
 #  index_users_on_username              (username) UNIQUE
 #
 class User < ApplicationRecord
+  # include MeiliSearch::Rails
+
   extend FriendlyId
+  # extend Pagy::Meilisearch
   extend Pagy::Searchkick
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
-  has_many :restaurants
-  has_many :reviews
-  has_many :comments
+  has_many :restaurants, dependent: :destroy
+  has_many :reviews, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   has_one_attached :avatar
 
@@ -66,7 +69,15 @@ class User < ApplicationRecord
 
   acts_as_voter
 
-  searchkick word_start: [:username, :first_name, :last_name], word_middle: [:username, :first_name, :last_name]
+  # meilisearch do
+  #   attribute :email
+  #   attribute :username
+  #   attribute :first_name
+  #   attribute :last_name
+
+  #   sortable_attributes [:gender, :birthday, :created_at, :updated_at]
+  #   filterable_attributes [:gender, :country_code, :time_zone]
+  # end
 
   validates :first_name, presence: true, length: { in: 2..50 }
   validates :last_name, presence: true, length: { in: 2..50 }
@@ -77,6 +88,8 @@ class User < ApplicationRecord
   validates :time_zone, presence: true
   # validates :admin, presence: true
   # validates :business_owner, presence: true
+
+  searchkick word_start: [:username, :first_name, :last_name], word_middle: [:username, :first_name, :last_name]
 
   def search_data
     {

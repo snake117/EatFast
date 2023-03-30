@@ -11,6 +11,7 @@
 #  cached_weighted_score   :integer          default(0)
 #  cached_weighted_total   :integer          default(0)
 #  claimed                 :boolean          default(FALSE), not null
+#  cuisine                 :string(200)      not null
 #  description             :text             not null
 #  email                   :string(100)      not null
 #  favoritable_score       :text
@@ -29,6 +30,7 @@
 # Indexes
 #
 #  index_restaurants_on_category_id  (category_id)
+#  index_restaurants_on_cuisine      (cuisine)
 #  index_restaurants_on_name         (name)
 #  index_restaurants_on_price_range  (price_range)
 #  index_restaurants_on_slug         (slug) UNIQUE

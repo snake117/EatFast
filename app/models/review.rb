@@ -37,7 +37,10 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Review < ApplicationRecord
+  # include MeiliSearch::Rails
+  
   extend FriendlyId
+  # extend Pagy::Meilisearch
   extend Pagy::Searchkick
 
   belongs_to :user

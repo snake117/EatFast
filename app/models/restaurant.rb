@@ -11,6 +11,7 @@
 #  cached_weighted_score   :integer          default(0)
 #  cached_weighted_total   :integer          default(0)
 #  claimed                 :boolean          default(FALSE), not null
+#  cuisine                 :string(200)      not null
 #  description             :text             not null
 #  email                   :string(100)      not null
 #  favoritable_score       :text
@@ -29,6 +30,7 @@
 # Indexes
 #
 #  index_restaurants_on_category_id  (category_id)
+#  index_restaurants_on_cuisine      (cuisine)
 #  index_restaurants_on_name         (name)
 #  index_restaurants_on_price_range  (price_range)
 #  index_restaurants_on_slug         (slug) UNIQUE
@@ -40,7 +42,10 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Restaurant < ApplicationRecord
+  # include MeiliSearch::Rails
+
   extend FriendlyId
+  # extend Pagy::Meilisearch
   extend Pagy::Searchkick
 
   belongs_to :user
@@ -64,16 +69,29 @@ class Restaurant < ApplicationRecord
 
   acts_as_favoritor
   acts_as_favoritable
-  acts_as_votable
 
-  searchkick word_start: [:name, :category, :price_range], word_middle: [:name, :category], text_middle: [:name, :category]
+  acts_as_votable
 
   validates :name, presence: true, length: { minimum: 2, maximum: 80 }
   validates :description, presence: true, length: { minimum: 10, maximum: 5000 }
+  validates :cuisine, presence: true, length: { minimum: 2, maximum: 150 }
   validates :price_range, presence: true, numericality: { only_integer: true }
+
   validates :email, presence: true, uniqueness: true, length: { minimum: 5, maximum: 100 }
   validates :phone,         allow_blank: true, length: { minimum: 4, maximum: 20 }
   validates :website,       allow_blank: true, length: { minimum: 4, maximum: 150 }
+
+
+  # meilisearch do
+  #   attribute :name
+  #   attribute :description
+  #   attribute :cuisine
+    
+  #   filterable_attributes [:cuisine]
+  #   sortable_attributes [:price_range, :created_at, :updated_at]
+  # end
+
+  searchkick word_start: [:name, :category, :price_range], word_middle: [:name, :category], text_middle: [:name, :category]
 
   def search_data
     {

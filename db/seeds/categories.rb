@@ -46,4 +46,10 @@ restaurant_categories.each do |restaurant_category|
 	puts "\t\tCategory created: #{create_restaurant_category.display_name} [#{create_restaurant_category.name}]!"
 end
 
+if Category.reindex
+	puts "\n\tReindexed categories!\n"
+else
+	puts "\n\tError: Failed to reindex categories!\n"
+end
+
 puts "------END: Categories------"

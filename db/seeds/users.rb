@@ -105,4 +105,11 @@ puts "\t------End: Admins------"
 		puts "\tError: Failed to create user - #{create_user_data[:username]}"
 	end
 end
+
+if User.reindex
+	puts "\n\tReindexed users!\n"
+else
+	puts "\n\tError: Failed to reindex users!\n"
+end
+
 puts "------END: Users------"

@@ -220,6 +220,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_153557) do
     t.bigint "category_id", null: false
     t.string "name", limit: 200, null: false
     t.text "description", null: false
+    t.string "cuisine", limit: 200, null: false
     t.integer "price_range", null: false
     t.boolean "claimed", default: false, null: false
     t.string "email", limit: 100, null: false
@@ -239,6 +240,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_153557) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_restaurants_on_category_id"
+    t.index ["cuisine"], name: "index_restaurants_on_cuisine"
     t.index ["name"], name: "index_restaurants_on_name"
     t.index ["price_range"], name: "index_restaurants_on_price_range"
     t.index ["slug"], name: "index_restaurants_on_slug", unique: true

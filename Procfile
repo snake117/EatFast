@@ -1,5 +1,6 @@
 web: bin/rails server
 css: bin/rails tailwindcss:watch
+# search: meilisearch
 # worker: bundle exec sidekiq
 # redis: redis-server
 

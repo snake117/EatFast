@@ -6,6 +6,7 @@ class CreateRestaurants < ActiveRecord::Migration[7.0]
 
       t.string :name, null: false, limit: 200, index: true
       t.text :description, null: false, limit: 5000
+      t.string :cuisine, null: false, limit: 200, index: true
       t.integer :price_range, null: false, numericality: true, index: true
       t.boolean :claimed, null: false, default: false
       t.string :email, null: false, limit: 100

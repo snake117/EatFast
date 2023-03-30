@@ -34,7 +34,10 @@
 #  fk_rails_...  (restaurant_id => restaurants.id)
 #
 class MenuItem < ApplicationRecord
+  # include MeiliSearch::Rails
+
   extend FriendlyId
+  # extend Pagy::Meilisearch
   extend Pagy::Searchkick
 
   belongs_to :restaurant
@@ -44,22 +47,37 @@ class MenuItem < ApplicationRecord
 
   friendly_id :name, use: :scoped, scope: [:restaurant]
 
-  monetize :price
+  monetize :price_cents
 
   acts_as_taggable_on :ingredients
+  acts_as_taggable_on :allergens
 
   acts_as_favoritor
   acts_as_favoritable
 
   acts_as_voter
 
-  searchkick word_start: [:name, :description, :category], word_middle: [:name, :description, :category], word_end: [:name, :description, :category]
+  meilisearch do
+    attribute :name
+    attribute :description
+    attribute :category
+    attribute :price_range
+
+    filterable_attributes [:category]
+    sortable_attributes [:created_at, :updated_at]
+  end
+
+  searchkick searchable: [:name, :category],
+             word_start: [:name, :description, :category], 
+             word_middle: [:name, :description, :category], 
+             word_end: [:name, :description, :category]
 
   def search_data
     {
       name: name,
       description: :description,
       category: category.display_name,
+      price: price.to_s("F")
       # popularity: popularity
     }
   end

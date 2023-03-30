@@ -1,7 +1,8 @@
 web: bin/rails server -p 3000
 css: bin/rails tailwindcss:watch
-# worker: bundle exec sidekiq
-# redis: redis-server
+worker: bundle exec sidekiq
+redis: redis-server
+# search: meilisearch # --master-key=''
 
 # web: unset PORT && bin/rails server
 # js: yarn build --watch

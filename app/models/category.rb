@@ -18,7 +18,10 @@
 #  index_categories_on_slug      (slug) UNIQUE
 #
 class Category < ApplicationRecord
+  # include MeiliSearch::Rails
+
 	extend FriendlyId
+  # extend Pagy::Meilisearch
   extend Pagy::Searchkick
 
   # Broadcast changes in realtime with Hotwire
@@ -33,6 +36,11 @@ class Category < ApplicationRecord
   searchkick word_start: [:name, :display_name], word_middle: [:name, :display_name], text_middle: [:name, :display_name]
 
   has_ancestry counter_cache: true, cache_depth: true
+
+  # meilisearch do
+  #   attribute :name
+  #   attribute :display_name
+  # end
 
   def search_data
     {

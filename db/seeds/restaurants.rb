@@ -14,7 +14,7 @@ restaurant_owners.each do |restaurant_owner|
 		user_id: restaurant_owner.id,
 		category_id: restaurant_subcategories.sample.id,
 		name: Faker::Restaurant.name,
-		# category: Faker::Restaurant.type,
+		cuisine: Faker::Restaurant.type,
 		price_range: rand(1..4),
 		description: Faker::Restaurant.description,
 		claimed: false,
@@ -65,6 +65,12 @@ restaurant_owners.each do |restaurant_owner|
 	else
 		puts "Error: Failed to create restaurant: #{create_restaurant}"
 	end
+end
+
+if Restaurant.reindex
+	puts "\n\tReindexed restaurants!\n"
+else
+	puts "\n\tError: Failed to reindex restaurants!\n"
 end
 
 puts "------END: Restaurants------"
