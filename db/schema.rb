@@ -253,13 +253,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_153557) do
 
   create_table "reviews", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "restaurant_id", null: false
+    t.string "reviewable_type", null: false
+    t.bigint "reviewable_id", null: false
     t.string "title", limit: 125, null: false
-    t.decimal "food", precision: 2, scale: 2, default: "0.0", null: false
-    t.decimal "atmosphere", precision: 2, scale: 2, default: "0.0", null: false
-    t.decimal "price", precision: 2, scale: 2, default: "0.0", null: false
-    t.decimal "speed", precision: 2, scale: 2, default: "0.0", null: false
-    t.decimal "overall", precision: 2, scale: 2, default: "0.0", null: false
+    t.decimal "food", default: "0.0", null: false
+    t.decimal "atmosphere", default: "0.0", null: false
+    t.decimal "price", default: "0.0", null: false
+    t.decimal "speed", default: "0.0", null: false
+    t.decimal "overall", default: "0.0", null: false
     t.boolean "recommend", default: true, null: false
     t.string "slug", null: false
     t.integer "cached_votes_total", default: 0
@@ -273,7 +274,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_153557) do
     t.text "favoritable_total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["restaurant_id"], name: "index_reviews_on_restaurant_id"
+    t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable"
     t.index ["slug"], name: "index_reviews_on_slug", unique: true
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
@@ -375,7 +376,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_153557) do
   add_foreign_key "pay_subscriptions", "pay_customers", column: "customer_id"
   add_foreign_key "restaurants", "categories"
   add_foreign_key "restaurants", "users"
-  add_foreign_key "reviews", "restaurants"
   add_foreign_key "reviews", "users"
   add_foreign_key "taggings", "tags"
 end
