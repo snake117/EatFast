@@ -38,6 +38,10 @@
 
 .DS_Store
 
+*.rdb
+
+data.ms/
+
 /config/master.key
 
 /config/credentials/development.key
