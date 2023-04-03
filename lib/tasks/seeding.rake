@@ -36,11 +36,12 @@ namespace :db do
 
       foundation_partials_path_array = [
         Rails.root.join('db', 'seeds', 'categories.rb'),
-        # Rails.root.join('db', 'seeds', 'users.rb'),
-        # Rails.root.join('db', 'seeds', 'restaurants.rb'),
-        # Rails.root.join('db', 'seeds', 'menu_items.rb'),
-        # Rails.root.join('db', 'seeds', 'reviews.rb'),
-        # Rails.root.join('db', 'seeds', 'comments.rb'),
+        Rails.root.join('db', 'seeds', 'users.rb'),
+        Rails.root.join('db', 'seeds', 'restaurants.rb'),
+        Rails.root.join('db', 'seeds', 'addresses.rb'),
+        Rails.root.join('db', 'seeds', 'menu_items.rb'),
+        Rails.root.join('db', 'seeds', 'reviews.rb'),
+        Rails.root.join('db', 'seeds', 'comments.rb'),
       ]
 
       foundation_partials_path_array.each do |foundation_partial_path|
@@ -58,6 +59,13 @@ namespace :db do
 
       task task_name.to_sym => :environment do
         load(filename) if File.exist?(filename)
+      end
+    end
+
+    # This is for if you want to run all seeds inside db/seeds directory
+    task :all => :environment do
+      Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |filename|
+        load(filename)
       end
     end
 

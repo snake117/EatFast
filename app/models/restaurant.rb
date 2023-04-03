@@ -51,19 +51,24 @@ class Restaurant < ApplicationRecord
   belongs_to :user
   belongs_to :category
 
-  has_many :menu_items
+  has_many :menu_items, dependent: :destroy
 
-  has_many :reviews, as: :reviewable
-  has_many :comments, as: :commentable
+  # has_many :addresses, through: :addresses, as: :addressable, dependent: :destroy, inverse_of: :restaurant, source: :addresses
+  has_many :addresses, as: :addressable
+  has_many :addressable, through: :addresses
+  has_many :reviews, as: :reviewable, dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
+
+  accepts_nested_attributes_for :addresses, reject_if: :all_blank, allow_destroy: true
 
   has_one_attached :logo
   has_one_attached :banner
   has_many_attached :images
 
   # Broadcast changes in realtime with Hotwire
-  after_create_commit  -> { broadcast_prepend_later_to :restaurants, partial: "restaurants/index", locals: { brand: self } }
-  after_update_commit  -> { broadcast_replace_later_to self }
-  after_destroy_commit -> { broadcast_remove_to :restaurants, target: dom_id(self, :index) }
+  # after_create_commit  -> { broadcast_prepend_later_to :restaurants, partial: "restaurants/index", locals: { brand: self } }
+  # after_update_commit  -> { broadcast_replace_later_to self }
+  # after_destroy_commit -> { broadcast_remove_to :restaurants, target: dom_id(self, :index) }
 
   friendly_id :name, use: :slugged
 
@@ -81,6 +86,7 @@ class Restaurant < ApplicationRecord
   validates :phone,         allow_blank: true, length: { minimum: 4, maximum: 20 }
   validates :website,       allow_blank: true, length: { minimum: 4, maximum: 150 }
 
+  validates_associated :addresses
 
   # meilisearch do
   #   attribute :name

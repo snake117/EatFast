@@ -30,6 +30,7 @@ class Category < ApplicationRecord
   # after_destroy_commit -> { broadcast_remove_to :categories, target: dom_id(self, :index) }
 
   has_many :restaurants
+  has_many :menu_items
 
   friendly_id :display_name, use: :slugged
 

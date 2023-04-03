@@ -16,7 +16,7 @@ restaurants.each do |restaurant|
 		create_comment = restaurant.comments.new(
 				user_id: random_user.id,
 				commentable: restaurant,
-				body: Faker::Lorem.words(number: rand(7..30).join(' '))
+				body: Faker::Lorem.words(number: rand(7..30)).join(' ')
 			)
 
 		if create_comment.save!
@@ -44,7 +44,7 @@ reviews.each do |review|
 		create_comment = review.comments.new(
 				user_id: random_user.id,
 				commentable: review,
-				body: Faker::Lorem.words(number: rand(7..30).join(' '))
+				body: Faker::Lorem.words(number: rand(7..30)).join(' ')
 			)
 
 		if create_comment.save!

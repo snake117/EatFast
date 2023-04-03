@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :restaurants do
     resources :comments, module: :restaurants
     resources :menu_items
+    resources :addresses, module: :restaurants
   end
 
   resources :comments do
@@ -23,6 +24,8 @@ Rails.application.routes.draw do
   end
 
   resources :categories
+
+  resources :addresses
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

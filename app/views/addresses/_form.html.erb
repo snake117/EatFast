@@ -1,0 +1,56 @@
+<div class="col-span-full">
+  <%= address.label :street_one, "Street One", class: "block text-sm font-medium leading-6 text-gray-900" %>
+  <div class="mt-2">
+    <%= address.text_field :street_one, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+  </div>
+</div>
+
+<div class="col-span-full">
+  <%= address.label :street_two, "Street Two", class: "block text-sm font-medium leading-6 text-gray-900" %>
+  <div class="mt-2">
+    <%= address.text_field :street_two, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+  </div>
+</div>
+
+<div class="sm:col-span-2 sm:col-start-1">
+  <%= address.label :city, class: "block text-sm font-medium leading-6 text-gray-900" %>
+  <div class="mt-2">
+    <%= address.text_field :city, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+  </div>
+</div>
+
+<div class="sm:col-span-2">
+  <%= address.label :state, "State / Province", class: "block text-sm font-medium leading-6 text-gray-900" %>
+  <div class="mt-2">
+    <%= address.select :state, options_for_select(us_states), {}, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" %>
+  </div>
+</div>
+
+<div class="sm:col-span-2">
+  <%= address.label :country, class: "block text-sm font-medium leading-6 text-gray-900" %>
+  <div class="mt-2">
+    <%= address.select :country, options_for_select([["United States", "US"], ["Canada", "CA"]]), {}, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" %>
+    <%#= address.country_select :country, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" %>
+  </div>
+</div>
+
+<div class="sm:col-span-2">
+  <%= address.label :zipcode, class: "block text-sm font-medium leading-6 text-gray-900" %>
+  <div class="mt-2">
+    <%= address.text_field :zipcode, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+  </div>
+</div>
+
+<div class="sm:col-span-3">
+  <%= form.label :email, class: "block text-sm font-medium leading-6 text-gray-900" %>
+  <div class="mt-2">
+    <%= form.email_field :email, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+  </div>
+</div>
+
+<div class="sm:col-span-3">
+  <%= form.label :phone, class: "block text-sm font-medium leading-6 text-gray-900" %>
+  <div class="mt-2">
+    <%= form.phone_field :phone, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+  </div>
+</div>

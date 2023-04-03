@@ -54,9 +54,14 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
+  has_many :addresses, as: :addressable
+  has_many :addressable, through: :addresses #, as: :addressable, inverse_of: :user, source: :addressable, source_type: "Address", class_name: "Address", dependent: :destroy # , inverse_of: :user
+  # has_many :addresses, through: :addresses, as: :addressable, dependent: :destroy, class_name: "Address"
   has_many :restaurants, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :comments, dependent: :destroy
+
+  accepts_nested_attributes_for :addresses, reject_if: :all_blank, allow_destroy: true
 
   has_one_attached :avatar
 
@@ -68,6 +73,8 @@ class User < ApplicationRecord
   acts_as_favoritable
 
   acts_as_voter
+
+  pay_customer
 
   # meilisearch do
   #   attribute :email
@@ -98,4 +105,8 @@ class User < ApplicationRecord
       last_name: last_name
     }
   end
+
+  # def addressable_type=(class_name)
+  #    super(class_name.constantize.base_class.to_s)
+  # end
 end
