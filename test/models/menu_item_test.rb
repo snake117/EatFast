@@ -3,6 +3,8 @@
 # Table name: menu_items
 #
 #  id                      :bigint           not null, primary key
+#  ancestry                :string           not null
+#  ancestry_depth          :integer          default(0)
 #  cached_votes_down       :integer          default(0)
 #  cached_votes_score      :integer          default(0)
 #  cached_votes_total      :integer          default(0)
@@ -10,12 +12,13 @@
 #  cached_weighted_average :float            default(0.0)
 #  cached_weighted_score   :integer          default(0)
 #  cached_weighted_total   :integer          default(0)
+#  children_count          :integer          default(0)
 #  description             :text             not null
 #  favoritable_score       :text
 #  favoritable_total       :text
 #  name                    :string(150)      not null
-#  price_cents_cents       :integer          default(0), not null
-#  price_cents_currency    :string           default("USD"), not null
+#  price_cents             :integer          default(0), not null
+#  price_currency          :string           default("USD"), not null
 #  slug                    :string           not null
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
@@ -24,6 +27,7 @@
 #
 # Indexes
 #
+#  index_menu_items_on_ancestry       (ancestry)
 #  index_menu_items_on_category_id    (category_id)
 #  index_menu_items_on_restaurant_id  (restaurant_id)
 #  index_menu_items_on_slug           (slug)

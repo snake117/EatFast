@@ -8,7 +8,7 @@ class CreateMenuItems < ActiveRecord::Migration[7.0]
       
       t.text :description, null: false, limit: 3000
       
-      t.monetize :price_cents
+      t.monetize :price
 
       # Slug for FriendlyID
       t.string :slug, null: false, index: true
@@ -25,6 +25,11 @@ class CreateMenuItems < ActiveRecord::Migration[7.0]
       # acts_as_favoritable (acts_as_favoritor gem)
       t.text :favoritable_score
       t.text :favoritable_total
+
+      # Ancestry gem
+      t.string  :ancestry, collation: 'C', null: false, index: true
+      t.integer :ancestry_depth, default: 0
+      t.integer :children_count, default: 0
 
       t.timestamps
     end

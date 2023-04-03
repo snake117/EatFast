@@ -3,6 +3,8 @@
 # Table name: menu_items
 #
 #  id                      :bigint           not null, primary key
+#  ancestry                :string           not null
+#  ancestry_depth          :integer          default(0)
 #  cached_votes_down       :integer          default(0)
 #  cached_votes_score      :integer          default(0)
 #  cached_votes_total      :integer          default(0)
@@ -10,12 +12,13 @@
 #  cached_weighted_average :float            default(0.0)
 #  cached_weighted_score   :integer          default(0)
 #  cached_weighted_total   :integer          default(0)
+#  children_count          :integer          default(0)
 #  description             :text             not null
 #  favoritable_score       :text
 #  favoritable_total       :text
 #  name                    :string(150)      not null
-#  price_cents_cents       :integer          default(0), not null
-#  price_cents_currency    :string           default("USD"), not null
+#  price_cents             :integer          default(0), not null
+#  price_currency          :string           default("USD"), not null
 #  slug                    :string           not null
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
@@ -24,6 +27,7 @@
 #
 # Indexes
 #
+#  index_menu_items_on_ancestry       (ancestry)
 #  index_menu_items_on_category_id    (category_id)
 #  index_menu_items_on_restaurant_id  (restaurant_id)
 #  index_menu_items_on_slug           (slug)
@@ -45,27 +49,29 @@ class MenuItem < ApplicationRecord
 
   has_one_attached :image
 
+  has_ancestry counter_cache: true, cache_depth: true
+
   friendly_id :name, use: :scoped, scope: [:restaurant]
 
   monetize :price_cents
 
   acts_as_taggable_on :ingredients
-  acts_as_taggable_on :allergens
+  # acts_as_taggable_on :allergens
 
   acts_as_favoritor
   acts_as_favoritable
 
   acts_as_voter
 
-  meilisearch do
-    attribute :name
-    attribute :description
-    attribute :category
-    attribute :price_range
+  # meilisearch do
+  #   attribute :name
+  #   attribute :description
+  #   attribute :category
+  #   attribute :price_range
 
-    filterable_attributes [:category]
-    sortable_attributes [:created_at, :updated_at]
-  end
+  #   filterable_attributes [:category]
+  #   sortable_attributes [:created_at, :updated_at]
+  # end
 
   searchkick searchable: [:name, :category],
              word_start: [:name, :description, :category], 
@@ -77,7 +83,7 @@ class MenuItem < ApplicationRecord
       name: name,
       description: :description,
       category: category.display_name,
-      price: price.to_s("F")
+      price: price
       # popularity: popularity
     }
   end

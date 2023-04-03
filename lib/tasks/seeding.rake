@@ -38,6 +38,9 @@ namespace :db do
         Rails.root.join('db', 'seeds', 'categories.rb'),
         # Rails.root.join('db', 'seeds', 'users.rb'),
         # Rails.root.join('db', 'seeds', 'restaurants.rb'),
+        # Rails.root.join('db', 'seeds', 'menu_items.rb'),
+        # Rails.root.join('db', 'seeds', 'reviews.rb'),
+        # Rails.root.join('db', 'seeds', 'comments.rb'),
       ]
 
       foundation_partials_path_array.each do |foundation_partial_path|

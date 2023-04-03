@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :menu_items
+  
   root to: 'pages#index'
 
   get 'pages/about'
@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :restaurants do
     resources :comments, module: :restaurants
+    resources :menu_items
   end
 
   resources :comments do
@@ -23,8 +24,6 @@ Rails.application.routes.draw do
 
   resources :categories
 
-  
-  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
