@@ -7,10 +7,10 @@
 #  city             :string(100)      default(""), not null
 #  country          :string(150)      default(""), not null
 #  email            :string(100)      default("")
+#  line_one         :string(100)      default(""), not null
+#  line_two         :string(100)      default("")
 #  phone            :string(25)       default(""), not null
 #  state            :string(50)       default(""), not null
-#  street_one       :string(100)      default(""), not null
-#  street_two       :string(100)      default("")
 #  zipcode          :string(20)       default(""), not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null

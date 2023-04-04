@@ -55,8 +55,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_03_170349) do
   create_table "addresses", force: :cascade do |t|
     t.string "addressable_type", null: false
     t.bigint "addressable_id", null: false
-    t.string "street_one", limit: 100, default: "", null: false
-    t.string "street_two", limit: 100, default: ""
+    t.string "line_one", limit: 100, default: "", null: false
+    t.string "line_two", limit: 100, default: ""
     t.string "city", limit: 100, default: "", null: false
     t.string "state", limit: 50, default: "", null: false
     t.string "country", limit: 150, default: "", null: false

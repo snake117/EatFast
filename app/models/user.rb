@@ -74,7 +74,7 @@ class User < ApplicationRecord
 
   acts_as_voter
 
-  pay_customer
+  pay_customer # stripe_attributes: :stripe_attributes
 
   # meilisearch do
   #   attribute :email
@@ -106,7 +106,17 @@ class User < ApplicationRecord
     }
   end
 
-  # def addressable_type=(class_name)
-  #    super(class_name.constantize.base_class.to_s)
+  # def stripe_attributes(pay_customer)
+  #   {
+  #     address: {
+  #       line1: pay_customer.owner.street_one,
+  #       city: pay_customer.owner.city,
+  #       country: pay_customer.owner.country
+  #     },
+  #     metadata: {
+  #       pay_customer_id: pay_customer.id,
+  #       user_id: id # or pay_customer.owner_id
+  #     }
+  #   }
   # end
 end

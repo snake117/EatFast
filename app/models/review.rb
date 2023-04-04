@@ -87,7 +87,7 @@ class Review < ApplicationRecord
   def search_data
     {
       title: title,
-      body: body
+      body: body.to_plain_text
     }
   end
 end

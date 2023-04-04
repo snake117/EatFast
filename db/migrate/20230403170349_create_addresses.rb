@@ -3,8 +3,8 @@ class CreateAddresses < ActiveRecord::Migration[7.0]
     create_table :addresses do |t|
       t.references :addressable, polymorphic: true, null: false, index: true
 
-      t.string :street_one, null: false, limit: 100, default: ""
-      t.string :street_two, null: true, limit: 100, default: ""
+      t.string :line_one, null: false, limit: 100, default: ""
+      t.string :line_two, null: true, limit: 100, default: ""
       t.string :city, null: false, limit: 100, default: ""
       t.string :state, null: false, limit: 50, default: ""
       t.string :country, null: false, limit: 150, default: ""

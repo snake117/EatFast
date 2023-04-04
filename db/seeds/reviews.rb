@@ -9,7 +9,8 @@ restaurants.each do |restaurant|
 	puts "#{restaurant.name}"
 	puts restaurant.inspect
 
-	number_of_reviews = rand(5..25)
+	# number_of_reviews = rand(5..25)
+	number_of_reviews = 7
 
 	number_of_reviews.times do
 		random_user = customers.sample
@@ -36,6 +37,12 @@ restaurants.each do |restaurant|
 		end
 
 	end # number_of_reviews.times do
+end
+
+if Review.reindex
+	puts "Review reindexed!"
+else
+	puts "Error: Failed to reindex review!"
 end
 
 puts "------BEGIN: Reviews------"

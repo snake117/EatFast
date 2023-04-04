@@ -47,4 +47,10 @@ restaurants.each do |restaurant|
 
 end
 
+if MenuItem.reindex
+	puts "MenuItem reindexed!"
+else
+	puts "Error: Failed to reindex MenuItem!"
+end
+
 puts "------END: Menu Items------"

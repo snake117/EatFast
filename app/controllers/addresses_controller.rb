@@ -70,6 +70,6 @@ class RestaurantsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def address_params
-      params.require(:address).permit(:id, :street_one, :street_two, :city, :state, :country, :zipcode, :phone, :email, :_destroy)
+      params.require(:address).permit(:id, :line_one, :line_two, :city, :state, :country, :zipcode, :phone, :email, :_destroy)
     end
 end

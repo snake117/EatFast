@@ -29,6 +29,6 @@ module Addressable
 	private
 
 	def address_params
-		params.require(:address).permit(:id, :street_one, :street_two, :city, :state, :country, :zipcode, :phone, :email)
+		params.require(:address).permit(:id, :line_one, :line_two, :city, :state, :country, :zipcode, :phone, :email)
 	end
 end

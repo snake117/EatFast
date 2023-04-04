@@ -10,8 +10,8 @@ users.each do |user|
 		user.addresses.build({
 			addressable_id: user.id,
 			addressable_type: "User",
-			street_one: Faker::Address.street_address,
-			street_two: Faker::Address.secondary_address,
+			line_one: Faker::Address.street_address,
+			line_two: Faker::Address.secondary_address,
 			city: Faker::Address.city,
 			state: Faker::Address.state_abbr,
 			country: ["US", "CA"].sample, # Faker::Address.country_code
@@ -33,8 +33,8 @@ restaurants.each do |restaurant|
 	restaurant.addresses.build({
 		addressable_id: restaurant.id,
 		addressable_type: "Restaurant",
-		street_one: Faker::Address.street_address,
-		street_two: Faker::Address.secondary_address,
+		line_one: Faker::Address.street_address,
+		line_two: Faker::Address.secondary_address,
 		city: Faker::Address.city,
 		state: Faker::Address.state_abbr,
 		country: ["US", "CA"].sample, # Faker::Address.country_code
@@ -42,11 +42,15 @@ restaurants.each do |restaurant|
 		phone: Faker::PhoneNumber.cell_phone,
 		email: Faker::Internet.email
 	}).save!
-	
+
 	puts "\tAddress created!"
 end
 
-
+if Address.reindex
+	puts "Address reindexed!"
+else
+	puts "Error: Failed to reindex address!"
+end
 
 
 puts "------END: Addresses------"
