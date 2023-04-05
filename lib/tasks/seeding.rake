@@ -62,11 +62,25 @@ namespace :db do
       end
     end
 
-    # This is for if you want to run all seeds inside db/seeds directory
+    # This is for if you want to run all seeds inside db/seeds directory in order
+    desc "Inject all seeds under db/seeds into DB in correct order"
     task :all => :environment do
-      Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |filename|
-        load(filename)
+      foundation_partials_path_array = [
+        Rails.root.join('db', 'seeds', 'categories.rb'),
+        Rails.root.join('db', 'seeds', 'users.rb'),
+        Rails.root.join('db', 'seeds', 'restaurants.rb'),
+        Rails.root.join('db', 'seeds', 'addresses.rb'),
+        Rails.root.join('db', 'seeds', 'menu_items.rb'),
+        Rails.root.join('db', 'seeds', 'reviews.rb'),
+        Rails.root.join('db', 'seeds', 'comments.rb'),
+      ]
+
+      foundation_partials_path_array.each do |foundation_partial_path|
+        load(foundation_partial_path) if File.exist?(foundation_partial_path)
       end
+
+      # Rake::Task["db:seed:users"].invoke
+      # Rake::Task["db:seed:restaurants"].invoke
     end
 
   end # namespace :seed

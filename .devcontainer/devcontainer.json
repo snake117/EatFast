@@ -1,0 +1,107 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ruby-rails-postgres
+{
+	"name": "Ruby on Rails & Postgres",
+	"build": {
+		"dockerfile": "Dockerfile",
+	},
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	// Set *default* container specific settings.json values on container create.
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"configureZshAsDefaultShell": true
+		},
+		"ghcr.io/devcontainers-contrib/features/homebrew-package:1": {
+			"installation_flags": "brew install postgresql@14 vips imagemagick tmux overmind foreman stripe/stripe-cli/stripe opensearch yarn zsh-autosuggestions"
+		},
+		"ghcr.io/devcontainers-contrib/features/curl-homebrew:1": {},
+		"ghcr.io/devcontainers-contrib/features/ffmpeg-homebrew:1": {},
+		"ghcr.io/devcontainers-contrib/features/redis-homebrew:1": {},
+		// "ghcr.io/devcontainers-contrib/features/tmux-homebrew:1": {}
+		"ghcr.io/devcontainers/features/node:1": {},
+		"ghcr.io/devcontainers/features/aws-cli:1": {},
+		// "ghcr.io/devcontainers-contrib/features/asdf-package:1": {},
+		"ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {
+			"plugins": "asdf copybuffer copyfile copypath dirhistory git github gitignore history jsontools  node npm postgres rails redis-cli ruby sublime sudo thor vscode web-search yarn zsh-autosuggestions"
+		}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// This can be used to network with other containers or the host.
+	"forwardPorts": [
+		3000,
+		5432
+	],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "bundle install && rake db:setup",
+	"postCreateCommand": "bin/setup && bin/rails db:seed:all_seeds",
+	// Configure tool-specific properties.
+	"customizations": {
+		"codespaces": {
+			"openFiles": [
+				"README.md",
+				"config/routes.rb",
+				"app/models/user.rb",
+				"app/models/restaurant.rb",
+				"app/models/menu_item.rb",
+			],
+		},
+		"vscode": {
+			"extensions": [
+				"mhutchie.git-graph",
+				"donjayamanne.git-extension-pack",
+				"akamud.vscode-theme-onedark",
+				"wingrunr21.vscode-ruby",
+				"aliariff.vscode-erb-beautify",
+				"cweijan.vscode-postgresql-client2",
+				"andrewmcodes.tailwindcss-extension-pack",
+				"yannklein.stimulusjs-snippets",
+				"benspaulding.procfile",
+				"giancarlopro.faker-snippets",
+				"andyyaldoo.vscode-json",
+				"formulahendry.auto-rename-tag",
+				"solnurkarim.html-to-css-autocompletion",
+				"rafamel.subtle-brackets",
+				"MarkosTh09.color-picker",
+				"redhat.vscode-yaml",
+				"Shopify.ruby-lsp"
+			],
+			"settings": {
+				"workbench.iconTheme": "material-icon-theme",
+				"[erb]": {
+					"editor.defaultFormatter": "aliariff.vscode-erb-beautify",
+					"editor.formatOnSave": true
+					},
+					"files.associations": {
+					"*.html.erb": "erb"
+					},
+				"emmet.includeLanguages": {
+						"ruby": "html",
+						"erb": "html"
+				},
+				"gitignore.cacheExpirationInterval": 3600,
+				"rubyLsp.rubyVersionManager": "rvm", // "asdf"
+				"rubyLsp.formatter": "auto",
+				"vscode-color-picker.languages": [
+					"ruby",
+					"html",
+					"javascript",
+					"css",
+					"scss",
+					"markdown"
+			]
+			}
+		}
+	},
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	"remoteUser": "vscode",
+	"hostRequirements": {
+		"cpus": 4,
+		"memory": "8gb",
+		"storage": "32gb"
+ }
+}
