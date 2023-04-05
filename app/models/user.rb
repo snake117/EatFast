@@ -74,7 +74,7 @@ class User < ApplicationRecord
 
   acts_as_voter
 
-  pay_customer # stripe_attributes: :stripe_attributes
+  pay_customer stripe_attributes: :stripe_attributes, default_payment_processor: :stripe
 
   # meilisearch do
   #   attribute :email
@@ -106,17 +106,19 @@ class User < ApplicationRecord
     }
   end
 
-  # def stripe_attributes(pay_customer)
-  #   {
-  #     address: {
-  #       line1: pay_customer.owner.street_one,
-  #       city: pay_customer.owner.city,
-  #       country: pay_customer.owner.country
-  #     },
-  #     metadata: {
-  #       pay_customer_id: pay_customer.id,
-  #       user_id: id # or pay_customer.owner_id
-  #     }
-  #   }
-  # end
+  def stripe_attributes(pay_customer)
+    {
+      address: {
+        line1: pay_customer.owner.line_one,
+        line2: pay_customer.owner.line_two,
+        city: pay_customer.owner.city,
+        state: pay_customer.owner.state,
+        country: pay_customer.owner.country
+      },
+      metadata: {
+        pay_customer_id: pay_customer.id,
+        user_id: id # or pay_customer.owner_id
+      }
+    }
+  end
 end

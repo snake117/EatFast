@@ -1,4 +1,7 @@
 puts "------BEGIN: Users------"
+
+avatars = Dir[Rails.root.join('db', 'seeds', 'avatars', '*.jpg')]
+
 puts "\t------BEGIN: Admins------"
 admin_names = {
 	neema: {
@@ -60,15 +63,21 @@ admin_names = {
 }
 
 admin_names.each do |key, values|
-	admin_avatar_filename = "admin-#{values[:first_name].downcase}-avatar"
-	admin_avatar_url = Faker::Avatar.image(slug: admin_avatar_filename, size: "300x300", format: "jpg")
-	down_obj = Down.download(admin_avatar_url, max_size: 6 * 1024 * 1024)
+	# admin_avatar_filename = "admin-#{values[:first_name].downcase}-avatar"
+	# admin_avatar_url = Faker::Avatar.image(slug: admin_avatar_filename, size: "300x300", format: "jpg")
+	# down_obj = Down.download(admin_avatar_url, max_size: 6 * 1024 * 1024)
+	# admin_avatar = {
+	# 	io: File.open(down_obj),
+	# 	filename: down_obj.original_filename, # admin_avatar_filename,
+	# 	content_type: down_obj.content_type # "image/jpg"
+	# }
 
+	admin_avatar_path = avatars.sample
 
 	admin_avatar = {
-		io: File.open(down_obj),
-		filename: down_obj.original_filename, # admin_avatar_filename,
-		content_type: down_obj.content_type # "image/jpg"
+		io: File.open(admin_avatar_path),
+		filename: "#{values[:username].downcase}-#{File.basename(admin_avatar_path)}",
+		content_type: "image/jpeg"
 	}
 
 	User.create!(values).avatar.attach(admin_avatar)
@@ -79,7 +88,7 @@ end
 puts "\t------End: Admins------\n"
 
 
-25.times do
+40.times do
 	random_num = rand(1..10)
 
 	if random_num <= 5
@@ -94,13 +103,20 @@ puts "\t------End: Admins------\n"
 		puts "Error: random_num (#{random_num}) must be between integers 1..10."
 	end
 			
-	user_avatar_filename = "#{user_first_name.downcase}-avatar"
-	user_avatar_url = Faker::Avatar.image(slug: user_avatar_filename, size: "300x300", format: "jpg")
+	# user_avatar_filename = "#{user_first_name.downcase}-avatar"
+	# user_avatar_url = Faker::Avatar.image(slug: user_avatar_filename, size: "300x300", format: "jpg")
+	# user_avatar = {
+	# 	io: URI.open(user_avatar_url),
+	# 	filename: user_avatar_filename,
+	# 	content_type: "image/jpg"
+	# }
+
+	user_avatar_path = avatars.sample
 
 	user_avatar = {
-		io: URI.open(user_avatar_url),
-		filename: user_avatar_filename,
-		content_type: "image/jpg"
+		io: File.open(user_avatar_path),
+		filename: "#{user_first_name.downcase}-avatar}-#{File.basename(user_avatar_path)}",
+		content_type: "image/jpeg"
 	}
 
 	create_user_data = {

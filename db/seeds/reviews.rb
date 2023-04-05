@@ -7,7 +7,7 @@ customers = User.all.where(business_owner: false)
 
 restaurants.each do |restaurant|
 	puts "#{restaurant.name}"
-	puts restaurant.inspect
+	# puts restaurant.inspect
 
 	# number_of_reviews = rand(5..25)
 	number_of_reviews = 7
