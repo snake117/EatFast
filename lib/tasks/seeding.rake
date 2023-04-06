@@ -64,7 +64,7 @@ namespace :db do
 
     # This is for if you want to run all seeds inside db/seeds directory in order
     desc "Inject all seeds under db/seeds into DB in correct order"
-    task :all => :environment do
+    task :all_seeds => :environment do
       foundation_partials_path_array = [
         Rails.root.join('db', 'seeds', 'categories.rb'),
         Rails.root.join('db', 'seeds', 'users.rb'),

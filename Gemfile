@@ -16,7 +16,7 @@ gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
+gem "importmap-rails" # gem "jsbundling-rails", "~> 1.1.0" # 
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
@@ -64,7 +64,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
   gem 'htmlbeautifier', '~> 1.4', '>= 1.4.2'
-  gem 'ruby-lsp', '~> 0.4.3', require: false
+  # gem 'ruby-lsp', '~> 0.4.3', require: false
   gem 'better_errors', '~> 2.9', '>= 2.9.1'
   gem 'binding_of_caller', '~> 1.0'
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]

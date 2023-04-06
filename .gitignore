@@ -36,11 +36,15 @@
 # ADDED
 /node_modules
 
+# macOS configs
 .DS_Store
 
+# Redis
+/dumps
 *.rdb
 
-data.ms/
+# Meilisearch
+/data.ms/*
 
 /config/master.key
 
