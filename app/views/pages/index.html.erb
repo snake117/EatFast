@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html style="background-color:rgb(255, 255, 204);">
+    <head>
+	    <title> chefOnline </title>
+	    <meta charset="utf-8">
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" >
+        <meta name="viewport" content="width=device-width, initial-scale=1" >
+    
+    <style>
+ white-border:hover {
+  border-bottom:5px solid white;
+ }
+		
+		#welcome{
+            top:12%;
+            left:32%;
+            right:32%;
+            color: #34342A;
+			position: absolute;
+			font-size: 35px;
+        }
+		
+		#delicious{
+  
+            position: absolute;
+			left: 53%;
+            color:#34342A;
+			font-size: 45px;
+			top:22%;
+       
+  
+        } 
+		
+		#Healthy{
+  
+            position: absolute;
+			left: 53%;
+            color:#749F18;
+			font-size: 40px;
+			top:28%;
+        }
+		
+		#Best{
+		
+            
+            position: absolute;
+			left: 53%;
+            color:#34342A;
+			font-size: 40px;
+			top:34%;
+        }
+        
+		.now {
+        background-color: #749F18 ;
+        color: black;
+        padding: 11px 20px;
+		margin-left:64%;
+        margin-right:22%;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        background-border: black;
+        cursor: pointer;
+        border-radius:5px;
+        }
+        
+		.intro{
+            position: absolute;
+			left: 55%;
+            color:#34342A;
+			font-size: 15px;
+			top:42%;
+			width: 350px;
+        }
+     
+
+    </style>
+	
+    </head>
+	
+	<body style="margin-left:10%;margin-right:10%;">   
+            
+			<span id="welcome">  Welcome to ChefOnline!! </span>
+		    
+            <div style="margin-top:10%;margin-left:5%; height:300px;width:500px;">
+            <%=image_tag "main_page.jpg"%>
+			</div>
+
+			<span id= "delicious" > DELICIOUS FOOD </span>
+			<span id= "Healthy" > HEALTHY FOOD<br></span>
+			<span id= "Best" > BEST FOOD<br></span>
+			<div class= "intro" > We serve our best quality healthy food!!! Feast your eyes and mouth with delicious food... <br>
+			                      We are so glad you chose to visit us. 
+								  Here at The chefOnline Restaurant, we are proud to provide delicious home-cooked meals 
+								  that are made with fresh, local ingredients.
+			</div>
+            <div class="now">
+                <%= link_to "Order Now!", "/pages/about"%>
+            </div>		
+	    </div>
+	</body>
+</html>

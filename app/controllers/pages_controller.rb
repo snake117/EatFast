@@ -10,4 +10,8 @@ class PagesController < ApplicationController
 
   def terms
   end
+
+  def successfulorder
+  end
+
 end

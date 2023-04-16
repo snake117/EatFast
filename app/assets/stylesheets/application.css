@@ -49,6 +49,12 @@ body {
   color: rgb(71 85 105);
 }
 
+.buttonBox{
+  background-color: rgb(176, 182, 182);
+  align-content: center;
+  text-align: center;
+}
+
 .notice {
   @apply flex items-center text-sm justify-center font-medium p-4;
 

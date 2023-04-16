@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'pages/about'
   get 'pages/privacy'
   get 'pages/terms'
+  get 'pages/successfulorder', to:"pages#successfulorder"
+  get 'pages/index', to:"pages#index"
   #get "../notifications/index" => "NotificationController#index"
   
 
