@@ -31,3 +31,6 @@
 
 en:
   hello: "Hello world"
+  notifications:
+  new_comment:
+    message:"1st notification comment"

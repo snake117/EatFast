@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   get 'pages/about'
   get 'pages/privacy'
   get 'pages/terms'
+  #get "../notifications/index" => "NotificationController#index"
   
+
   devise_for :users,
     controllers: {
       # omniauth_callbacks: "users/omniauth_callbacks",
