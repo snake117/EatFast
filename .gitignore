@@ -41,7 +41,7 @@
 
 # Redis
 /dumps
-*.rdb
+/*.rdb
 
 # Meilisearch
 /data.ms/*

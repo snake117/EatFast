@@ -4,7 +4,7 @@
   "description": "Order your meal and have it delivered to you fast!",
   "private": "true",
   "main": "index.js",
-  "author": "Neema Sadry <eh2731@wayne.edu",
+  "author": "Neema Sadry <eh2731@wayne.edu>",
   "license": "MIT",
   "dependencies": {
     "@hotwired/stimulus": "^3.2.1",
