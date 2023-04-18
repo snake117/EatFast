@@ -14,4 +14,10 @@ class PagesController < ApplicationController
   def successfulorder
   end
 
+  def submitorder
+  end
+
+  def email
+  end
+
 end
